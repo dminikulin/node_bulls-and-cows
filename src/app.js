@@ -38,4 +38,6 @@ function ask() {
   });
 }
 
-ask();
+if (require.main === module) {
+  ask();
+}
