@@ -10,6 +10,26 @@
  */
 function checkIsValidUserInput(userInput) {
   /* Write your code here */
+  const userNum = Number(userInput);
+  const uniqueNumbers = new Set(userInput);
+
+  if (Number.isNaN(userNum)) {
+    return false;
+  }
+
+  if (userInput[0] === '0') {
+    return false;
+  }
+
+  if (uniqueNumbers.size !== userInput.length) {
+    return false;
+  }
+
+  if (userInput.length !== 4) {
+    return false;
+  }
+
+  return true;
 }
 
 module.exports = {
