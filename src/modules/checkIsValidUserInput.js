@@ -10,22 +10,13 @@
  */
 function checkIsValidUserInput(userInput) {
   /* Write your code here */
-  const userNum = Number(userInput);
-  const uniqueNumbers = new Set(userInput);
-
-  if (Number.isNaN(userNum)) {
+  if (!/^[1-9]\d{3}$/.test(userInput)) {
     return false;
   }
 
-  if (userInput[0] === '0') {
-    return false;
-  }
+  const uniqueDigits = new Set(userInput);
 
-  if (uniqueNumbers.size !== userInput.length) {
-    return false;
-  }
-
-  if (userInput.length !== 4) {
+  if (uniqueDigits.size !== 4) {
     return false;
   }
 

@@ -13,22 +13,29 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question('Enter 4-digit number: ', (userNumber) => {
-  const isValid = checkIsValidUserInput(userNumber);
+const secret = generateRandomNumber();
 
-  if (!isValid) {
-    console.log('Your input is invalid, try again');
-    rl.close();
+function ask() {
+  rl.question('Enter 4-digit number: ', (userNumber) => {
+    const isValid = checkIsValidUserInput(userNumber);
 
-    return;
-  }
+    if (!isValid) {
+      console.log('Your input is invalid, try again.');
 
-  const computerNumber = generateRandomNumber();
+      return ask();
+    }
 
-  const bullsAndCows = getBullsAndCows(parseInt(userNumber), computerNumber);
+    const bullsAndCows = getBullsAndCows(parseInt(userNumber), secret);
 
-  console.log(`Computer has generated: ${computerNumber}`);
-  console.log(`Bulls: ${bullsAndCows.bulls}\nCows: ${bullsAndCows.cows}`);
+    console.log(`Bulls: ${bullsAndCows.bulls}\nCows: ${bullsAndCows.cows}`);
 
-  rl.close();
-});
+    if (bullsAndCows.bulls === 4) {
+      console.log('You won!');
+      rl.close();
+    } else {
+      ask();
+    }
+  });
+}
+
+ask();
